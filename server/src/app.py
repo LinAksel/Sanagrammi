@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from src.words import sample_words, check_anagram
+from src.words import check_anagram, random_word
 
 app = Flask(__name__)
 
@@ -9,7 +9,7 @@ def funktio():
 
 @app.route('/reader')
 def reader():
-    return jsonify(sample_words(1))
+    return jsonify([random_word()])
 
 @app.route('/check', methods = ['POST'])
 def check():
