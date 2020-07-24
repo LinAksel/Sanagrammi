@@ -21,7 +21,7 @@ export default function Home() {
       body: JSON.stringify({ word, candidate: userWord })
     }).then(res => res.json())
 
-    if (data.correct && !anagrams.includes(userWord)) {
+    if (data.correct && !anagrams.includes(userWord) && word !== userWord) {
       setAnagrams(anagrams.concat(userWord))
     }
 
