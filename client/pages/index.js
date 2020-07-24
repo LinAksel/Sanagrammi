@@ -6,14 +6,14 @@ export default function Home() {
   const [anagrams, setAnagrams] = useState([])
   const handleSubmit = async event => {
     event.preventDefault()
-    let data = await fetch('http://127.0.0.1:5000/check', { 
-      mode: 'cors', 
-      method: 'POST', 
-      headers: { 'Content-Type': 'application/json' }, 
-      body: JSON.stringify({ word, userWord })
+    let data = await fetch('http://127.0.0.1:5000/check', {
+      mode: 'cors',
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ word, candidate: userWord })
     }).then(res => res.json())
 
-    if (data.correct) {
+    if (data.correct && !anagrams.includes(userWord)) {
       setAnagrams(anagrams.concat(userWord))
     }
 
@@ -27,9 +27,10 @@ export default function Home() {
   }, [])
   return (
     <div id="main">
-      <h1>
+      <h1 style={{ textAlign: "right" }}>
         {word}
       </h1>
+      {/* <h1 style={{ textAlign: "left" }}>60</h1> */}
       <form onSubmit={handleSubmit}>
         <input value={userWord} onChange={event => setUserWord(event.target.value)} />
       </form>
