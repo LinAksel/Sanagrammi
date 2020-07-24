@@ -13,7 +13,6 @@ def sample_words(amount: int) -> list:
 
 def check_anagram(word: str, candidate: str) -> bool:
     if not candidate in words:
-        print('word not found')
         return False
 
     chars = defaultdict(int)
