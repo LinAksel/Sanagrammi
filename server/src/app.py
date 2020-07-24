@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, request
-from random import sample
-from xml.etree import ElementTree
+from src.words import sample_words, check_anagram
 
 app = Flask(__name__)
 
@@ -10,17 +9,13 @@ def funktio():
 
 @app.route('/reader')
 def reader():
-    root = ElementTree.parse('sanalista.xml').getroot()
-    words = []
-    for element in root:
-        word = element[0].text
-        words.append(word)
-    return jsonify(sample(words, 1))
+    return jsonify(sample_words(1))
 
 @app.route('/check', methods = ['POST'])
 def check():
     words = request.json
-    return jsonify({ 'correct': True })
+    correct = check_anagram(words['word'], words['candidate'])
+    return jsonify({ 'correct': correct })
 
 @app.after_request
 def after_request(response):
