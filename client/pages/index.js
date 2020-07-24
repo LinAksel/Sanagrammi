@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react'
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+
 export default function Home() {
   const [word, setWord] = useState()
   const [userWord, setUserWord] = useState()
   const [anagrams, setAnagrams] = useState([])
   const [time, setTime] = useState(60)
   const getWord = () => {
-    fetch('http://127.0.0.1:5000/reader')
+    fetch(`${API_URL}/reader`)
       .then(response => response.json())
       .then(data => setWord(data[0]))
   }
   const handleSubmit = async event => {
     event.preventDefault()
-    let data = await fetch('http://127.0.0.1:5000/check', {
+    let data = await fetch(`${API_URL}/check`, {
       mode: 'cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
