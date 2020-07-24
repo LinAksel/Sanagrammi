@@ -20,7 +20,7 @@ def reader():
 @app.route('/check', methods = ['POST'])
 def check():
     words = request.json
-    return jsonify(words)
+    return jsonify({ 'correct': True })
 
 @app.after_request
 def after_request(response):
