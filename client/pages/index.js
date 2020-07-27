@@ -18,7 +18,7 @@ export default function Home() {
       mode: 'cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ word, candidate: userWord })
+      body: JSON.stringify({ word, candidate: userWord.toLowerCase() })
     }).then(res => res.json())
 
     if (data.correct && !anagrams.includes(userWord) && word !== userWord) {
@@ -26,6 +26,7 @@ export default function Home() {
     }
 
     setUserWord('')
+    document.getElementById("field").reset();
   }
 
   useEffect(() => {
@@ -48,8 +49,8 @@ export default function Home() {
       <h1>
         {word}
       </h1>
-      <form onSubmit={handleSubmit}>
-        <input value={userWord} onChange={event => setUserWord(event.target.value)} />
+      <form id='field' onSubmit={handleSubmit}>
+        <input onChange={event => setUserWord(event.target.value.toLowerCase())} />
       </form>
       <div>
         {anagrams.map(a => <div key={a}>{a}</div>)}
