@@ -1,0 +1,1 @@
+Sanagrammi-applikaation lähdekoodi
